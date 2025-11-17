@@ -1,0 +1,12 @@
+.chat-detail {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px); /* Ajusta segun el tamaño del header */
+  padding: 10px;
+}
+
+.chat-detail > :first-child {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}

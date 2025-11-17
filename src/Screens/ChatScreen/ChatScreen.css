@@ -1,0 +1,171 @@
+.chat-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+}
+
+.chat-left-panel {
+  width: 40%;
+  background: #f1f1f1;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.chat-right-panel {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.empty-chat {
+  margin: auto;
+  color: #777;
+}
+
+.chat-detail-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 15px;
+
+  border-bottom: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.chat-detail-header img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* CONTENEDOR GENERAL DE CHAT DETAIL */
+.chat-detail-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* LISTA DE MENSAJES */
+.messages-list {
+  flex: 1;
+  padding: 15px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* MENSAJES */
+.message-item {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 10px;
+  background: #eaeaea;
+}
+
+.message-own {
+  align-self: flex-end;
+  background: #daf8cb;
+}
+
+/* INPUT ABAJO */
+.message-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.message-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+
+.message-form button {
+  margin-left: 10px;
+  padding: 10px 18px;
+  background: #0a84ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.message-form button:hover {
+  background: #006edc;
+}
+
+/* SCROLLBARS */
+
+.chat-left-panel::-webkit-scrollbar,
+.messages-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-left-panel::-webkit-scrollbar-thumb,
+.messages-list::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.chat-screen {
+  display: flex;
+  height: 100vh;
+}
+
+/* Panel izquierdo */
+.chat-left-panel {
+  width: 30%;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Panel principal */
+.chat-main {
+  width: 70%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 🔥 Header del contacto */
+.chat-header {
+  background: #e9f3ff;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #bcd2f0;
+}
+
+.chat-header-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.chat-header-name {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* Mensaje cuando no hay chat */
+.no-chat {
+  margin: auto;
+  font-size: 1.5rem;
+  opacity: 0.7;
+}

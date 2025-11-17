@@ -1,0 +1,57 @@
+.chatlist-container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Card del contacto */
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, transform 0.1s ease;
+  color: black;
+}
+
+.contact-card:hover {
+  background: #f0f4ff;
+  transform: scale(1.01);
+}
+
+/* Imagen de contacto */
+.contact-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Info de contacto */
+.contact-info h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.contact-info span {
+  font-size: 13px;
+  color: gray;
+}
+
+/* Estado seleccionado (cuando estás en /chat/:id) */
+.contact-card.active {
+  background: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+}
