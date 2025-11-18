@@ -5,7 +5,6 @@ import { getAllContacts } from "../../services/contactService";
 import ChatDetail from "../../Components/ChatDetail/ChatDetail";
 import { toast } from "react-toastify";
 import "./ChatScreen.css";
-//import { v4 as uuidv4 } from "uuid";
 
 const ChatScreen = () => {
   const [contacts, setContacts] = useState(null);
