@@ -190,7 +190,11 @@ const ChatScreen = () => {
 
   return (
     <div className="chat-container">
-      <div className="chat-left-panel">
+      <div
+        className={
+          chat_id ? "chat-left-panel hidden-mobile" : "chat-left-panel"
+        }
+      >
         <h2 className="title">Lista de contactos</h2>
         <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         {loading ? (
@@ -217,7 +221,7 @@ const ChatScreen = () => {
             />
           ) : null)}
       </div> */}
-      <div className="chat-main">
+      <div className={chat_id ? "chat-main" : "chat-main hidden-mobile"}>
         {!loading &&
           (!chat_id ? (
             <>
