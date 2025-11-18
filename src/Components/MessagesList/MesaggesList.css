@@ -27,3 +27,47 @@
   opacity: 0.7;
   margin-top: 5px;
 }
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-message-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 14px; /* tamaño pequeño */
+  margin-left: 8px;
+}
+
+.delete-message-btn:hover {
+  color: red;
+}
+
+.message-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #555;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-message-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-message-btn:hover {
+  color: red;
+}

@@ -5,6 +5,7 @@ import { getAllContacts } from "../../services/contactService";
 import ChatDetail from "../../Components/ChatDetail/ChatDetail";
 import { toast } from "react-toastify";
 import "./ChatScreen.css";
+//import { v4 as uuidv4 } from "uuid";
 
 const ChatScreen = () => {
   const [contacts, setContacts] = useState(null);
@@ -36,8 +37,8 @@ const ChatScreen = () => {
 
   function addNewContact(name, imageUrl) {
     const new_contact = {
-      id: contacts.length + 1,
-      user_id: contacts.length + 1,
+      id: Date.now(),
+      user_id: Date.now(),
       name,
       profile_picture:
         imageUrl.trim() !== ""
@@ -59,14 +60,14 @@ const ChatScreen = () => {
 
   function deleteContact(contactId) {
     const updatedContacts = contacts.filter(
-      (contact) => Number(contact.id) !== Number(contactId)
+      (contact) => contact.id !== contactId
     );
 
     setContacts(updatedContacts);
     localStorage.setItem("contacts", JSON.stringify(updatedContacts));
 
     // Si estabas viendo ese chat, lo limpiamos
-    if (chatDetail && Number(chatDetail.id) === Number(contactId)) {
+    if (chatDetail?.id === contactId) {
       setChatDetail(null);
     }
     toast.error("Contacto eliminado correctamente");
@@ -74,7 +75,7 @@ const ChatScreen = () => {
 
   function createNewMessage(message) {
     const new_message = {
-      id: chatDetail.messages.length + 1,
+      id: Date.now(),
       content: message,
       author_id: 50,
       author_name: "cosme fulanito",
@@ -105,7 +106,7 @@ const ChatScreen = () => {
 
   function sendAutomaticMessage() {
     const new_message = {
-      id: chatDetail.messages.length + 1,
+      id: Date.now(),
       content: "Tu mensaje fue recibido",
       author_id: chatDetail.user_id,
       author_name: chatDetail.name,
@@ -128,6 +129,36 @@ const ChatScreen = () => {
 
       return updatedContacts;
     });
+    //setTimeout(sendAutomaticMessage, 2000);
+  }
+
+  function deleteMessage(messageId) {
+    if (!chatDetail) return;
+
+    // Actualizar contactos y mensajes del chat seleccionado
+    setContacts((prevContacts) => {
+      const updatedContacts = prevContacts.map((chat) => {
+        if (Number(chat.id) === Number(chat_id)) {
+          return {
+            ...chat,
+            messages: chat.messages.filter((m) => m.id !== messageId),
+          };
+        }
+        return chat;
+      });
+
+      // Guardar en localStorage
+      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+
+      return updatedContacts;
+    });
+
+    // Actualizar chatDetail para que la UI se refresque
+    setChatDetail((prev) => ({
+      ...prev,
+      messages: prev.messages.filter((m) => m.id !== messageId),
+    }));
+    toast.info("El mensaje fue borrado correctamente");
   }
 
   function loadChatDetail() {
@@ -194,10 +225,12 @@ const ChatScreen = () => {
                 <h2 className="chat-header-name">{chatDetail.name}</h2>
               </div>
 
+              {chatDetail ? console.log(chatDetail) : null}
               {/* 🔥 MENSAJES */}
               <ChatDetail
                 chatDetail={chatDetail}
                 createNewMessage={createNewMessage}
+                deleteMessage={deleteMessage}
               />
             </>
           ) : null)}

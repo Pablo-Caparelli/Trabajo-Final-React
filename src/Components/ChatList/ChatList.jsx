@@ -3,11 +3,16 @@ import AddNewContact from "../AddNewContact/AddNewContact";
 import "./ChatList.css";
 
 const ChatList = ({ contacts, addNewContact, deleteContact }) => {
+  console.log(
+    "CONTACT IDS:",
+    contacts.map((c) => c.id)
+  );
   return (
     <div className="chatlist-container">
-      {contacts.map((contact) => (
+      {contacts.map((contact, index) => (
         <Link
           to={"/chat/" + contact.id}
+          //key={`${contact.id}-${index}`}
           key={contact.id}
           className="contact-card"
         >
