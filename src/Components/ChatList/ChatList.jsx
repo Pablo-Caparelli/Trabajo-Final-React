@@ -3,10 +3,10 @@ import AddNewContact from "../AddNewContact/AddNewContact";
 import "./ChatList.css";
 
 const ChatList = ({ contacts, addNewContact, deleteContact }) => {
-  console.log(
-    "CONTACT IDS:",
-    contacts.map((c) => c.id)
-  );
+  // console.log(
+  //   "CONTACT IDS:",
+  //   contacts.map((c) => c.id)
+  // );
   return (
     <div className="chatlist-container">
       {contacts.map((contact, index) => (

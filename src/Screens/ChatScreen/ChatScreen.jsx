@@ -5,6 +5,7 @@ import { getAllContacts } from "../../services/contactService";
 import ChatDetail from "../../Components/ChatDetail/ChatDetail";
 import { toast } from "react-toastify";
 import "./ChatScreen.css";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 const ChatScreen = () => {
   const [contacts, setContacts] = useState(null);
@@ -12,6 +13,7 @@ const ChatScreen = () => {
   const [error, setError] = useState(null);
   const [chatDetail, setChatDetail] = useState(null);
   const { chat_id } = useParams();
+  const [searchInput, setSearchInput] = useState("");
 
   function loadContacts() {
     setLoading(true);
@@ -174,6 +176,12 @@ const ChatScreen = () => {
     }
   }
 
+  const filteredContacts = contacts
+    ? contacts.filter((c) =>
+        c.name.toLowerCase().includes(searchInput.toLowerCase())
+      )
+    : [];
+
   /*Queremos que se cargue una sola vez */
   useEffect(loadContacts, []);
 
@@ -184,12 +192,13 @@ const ChatScreen = () => {
     <div className="chat-container">
       <div className="chat-left-panel">
         <h2 className="title">Lista de contactos</h2>
+        <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         {loading ? (
           <span>Cargando contactos...</span>
         ) : (
           contacts && (
             <ChatList
-              contacts={contacts}
+              contacts={filteredContacts}
               addNewContact={addNewContact}
               deleteContact={deleteContact}
             />
@@ -211,7 +220,14 @@ const ChatScreen = () => {
       <div className="chat-main">
         {!loading &&
           (!chat_id ? (
-            <h2 className="no-chat">Aún no has seleccionado ningún chat</h2>
+            <>
+              {" "}
+              <h2 className="no-chat">Aún no has seleccionado ningún chat</h2>
+              <SearchBar
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
+            </>
           ) : chatDetail ? (
             <>
               {/* 🔥 HEADER DEL CONTACTO */}
