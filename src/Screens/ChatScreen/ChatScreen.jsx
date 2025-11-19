@@ -6,6 +6,8 @@ import ChatDetail from "../../Components/ChatDetail/ChatDetail";
 import { toast } from "react-toastify";
 import "./ChatScreen.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ChatScreen = () => {
   const [contacts, setContacts] = useState(null);
@@ -14,6 +16,8 @@ const ChatScreen = () => {
   const [chatDetail, setChatDetail] = useState(null);
   const { chat_id } = useParams();
   const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function loadContacts() {
     setLoading(true);
@@ -57,6 +61,9 @@ const ChatScreen = () => {
     // Guardar en localStorage
     localStorage.setItem("contacts", JSON.stringify(updatedContacts));
     toast.success("Contacto agregado correctamente");
+
+    // ⭐ LLEVAR AUTOMÁTICAMENTE AL NUEVO CONTACTO
+    navigate(`/chat/${new_contact.id}`);
   }
 
   function deleteContact(contactId) {
@@ -68,8 +75,16 @@ const ChatScreen = () => {
     localStorage.setItem("contacts", JSON.stringify(updatedContacts));
 
     // Si estabas viendo ese chat, lo limpiamos
+    // if (chatDetail?.id === contactId) {
+    //   setChatDetail(null);
+    // }
     if (chatDetail?.id === contactId) {
-      setChatDetail(null);
+      const defaultContact = updatedContacts.find((c) => c.id === 1);
+      if (defaultContact) {
+        navigate(`/chat/1`);
+      } else {
+        setChatDetail(null);
+      }
     }
     toast.error("Contacto eliminado correctamente");
   }
@@ -79,8 +94,8 @@ const ChatScreen = () => {
       id: Date.now(),
       content: message,
       author_id: 50,
-      author_name: "cosme fulanito",
-      created_at: "Hoy",
+      author_name: "Pablo",
+      created_at: new Date().toLocaleString(),
       status: "VIEWED",
     };
 
@@ -187,6 +202,18 @@ const ChatScreen = () => {
 
   /* Cada vez que cambie la ruta revisar el chat seleccionado */
   useEffect(loadChatDetail, [chat_id, contacts]);
+
+  useEffect(() => {
+    if (!loading && contacts && contacts.length > 0) {
+      // contact correspondiente al URL
+      const exists = contacts.some((c) => String(c.id) === String(chat_id));
+
+      // si no existe, redirigimos al primero
+      if (!exists) {
+        navigate(`/chat/${contacts[0].id}`, { replace: true });
+      }
+    }
+  }, [contacts, chat_id, loading, navigate]);
 
   return (
     <div className="chat-container">
