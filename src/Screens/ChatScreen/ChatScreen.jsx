@@ -126,7 +126,7 @@ const ChatScreen = () => {
       content: "Tu mensaje fue recibido",
       author_id: chatDetail.user_id,
       author_name: chatDetail.name,
-      created_at: "Hoy",
+      created_at: new Date().toLocaleString(),
       status: "VIEWED",
     };
 
