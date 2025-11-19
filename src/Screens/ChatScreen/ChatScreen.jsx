@@ -74,10 +74,6 @@ const ChatScreen = () => {
     setContacts(updatedContacts);
     localStorage.setItem("contacts", JSON.stringify(updatedContacts));
 
-    // Si estabas viendo ese chat, lo limpiamos
-    // if (chatDetail?.id === contactId) {
-    //   setChatDetail(null);
-    // }
     if (chatDetail?.id === contactId) {
       const defaultContact = updatedContacts.find((c) => c.id === 1);
       if (defaultContact) {
@@ -145,7 +141,6 @@ const ChatScreen = () => {
 
       return updatedContacts;
     });
-    //setTimeout(sendAutomaticMessage, 2000);
   }
 
   function deleteMessage(messageId) {
@@ -236,18 +231,7 @@ const ChatScreen = () => {
           )
         )}
       </div>
-      {/* //Panel derecho con el detalle del contacto
-      <div className="chat-right-panel">
-        {!loading &&
-          (!chat_id ? (
-            <h2>Aun no has seleccionado ningun chat</h2>
-          ) : chatDetail ? (
-            <ChatDetail
-              chatDetail={chatDetail}
-              createNewMessage={createNewMessage}
-            />
-          ) : null)}
-      </div> */}
+
       <div className={chat_id ? "chat-main" : "chat-main hidden-mobile"}>
         {!loading &&
           (!chat_id ? (
